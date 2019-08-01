@@ -7,7 +7,11 @@ import sys
 import json
 import base64
 import itertools
-import Queue
+
+try:
+    import queue
+except:
+    import Queue as queue
 
 
 class App:
@@ -48,7 +52,7 @@ class App:
             id = next(self.id)
 
         self.sockets.add(sock)
-        self.buffers[sock] = Queue.Queue()
+        self.buffers[sock] = queue.Queue()
         self.s2id[sock] = id
         self.id2s[id] = sock
 
