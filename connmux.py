@@ -109,8 +109,12 @@ class App:
                 data = sock.readline()
                 self.process_mux_input(data)
             else:
-                data = sock.recv(4096)
-                if not data:
+                try:
+                    data = sock.recv(4096)
+                    if not data:
+                        self.handle_conn_drop(sock)
+                        return
+                except socket.error:
                     self.handle_conn_drop(sock)
                     return
 
