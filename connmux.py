@@ -59,10 +59,11 @@ class App:
         return id
 
     def unregister_socket(self, sock):
-        id = self.s2id[sock]
-        self.sockets.remove(sock)
-        del self.s2id[sock]
-        del self.id2s[id]
+        if sock in self.sockets:
+            id = self.s2id[sock]
+            self.sockets.remove(sock)
+            del self.s2id[sock]
+            del self.id2s[id]
 
     def accept_client(self, listener):
         sock, address = listener.accept()
