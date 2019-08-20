@@ -64,6 +64,7 @@ class App:
             self.sockets.remove(sock)
             del self.s2id[sock]
             del self.id2s[id]
+            del self.buffers[sock]
 
     def accept_client(self, listener):
         sock, address = listener.accept()
